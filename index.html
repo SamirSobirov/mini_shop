@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		body {
+			background-color: whitesmoke;
+			overflow-x: hidden;
+		}
+
+		.mainDiv {
+			width: 100%;
+			height: 400px;
+			padding: 30px 20px;
+			border-radius: 14px;
+			background-color: white;
+			position: relative;
+			border: 1px solid black;
+		}
+
+		.mainImg {
+			width: 100%;
+			height: 161px;
+			object-fit: contain;
+		}
+
+		.middleDiv {
+			width: 100%;
+			height: 50%;
+			background-color: black;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			display: flex;
+			justify-content: start;
+			align-items: start;
+			flex-direction: column;
+			gap: 10px;
+			padding: 20px 20px 20px 20px;
+			border-end-end-radius: 14px;
+			border-end-start-radius: 14px;
+		}
+
+		.h1 {
+			font-size: 20px;
+			font-weight: 900;
+			color: white;
+			text-align: left;
+		}
+
+		.p {
+			font-size: 14px;
+			font-weight: 300;
+			color: whitesmoke;
+		}
+
+		.bottomDiv {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+		}
+
+		.bottomDivBox {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+			cursor: pointer;
+		}
+
+		.boxP {
+			color: white;
+			font-size: 15px;
+			font-weight: 700;
+		}
+
+		.btn {
+			width: 100%;
+			height: 40px;
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			color: black;
+			box-shadow: 0 0 5px gray;
+		}
+
+		.btn:hover {
+			opacity: 0.9;
+		}
+
+		.btn:active {
+			box-shadow: 0 1px 5px gray;
+		}
+
+		.btn_added {
+			background-color: blue;
+			color: white;
+		}
+
+		.boxImg {
+			width: 20px;
+			height: 20px;
+			object-fit: contain;
+		}
+
+		.container {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 20px;
+			width: 80%;
+			margin: 40px auto;
+		}
+
+		b {
+			color: orange;
+			cursor: pointer;
+		}
+
+		h2 {
+			text-align: center;
+			font-size: 40px;
+			font-weight: 700;
+			padding: 50px 0 20px;
+		}
+
+		.btns {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+		}
+
+		.btns button {
+			width: 20%;
+			height: 40px;
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			color: black;
+			box-shadow: 0 0 5px gray;
+		}
+
+		.btns button:hover {
+			opacity: 0.9;
+		}
+
+		.btns button:active {
+			box-shadow: 0 1px 5px gray;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		.active {
+			display: block;
+		}
+
+		.backet_active {
+			animation: busket 1s forwards;
+		}
+
+		.backet_hide {
+			animation: busketClose 1s forwards;
+		}
+
+		@keyframes busketClose {
+			from {
+				right: 0;
+			}
+
+			to {
+				right: -45%;
+			}
+		}
+
+		@keyframes busket {
+			from {
+				right: -45%;
+			}
+
+			to {
+				right: 0;
+			}
+		}
+
+		.basket {
+			display: flex;
+			flex-direction: column;
+			width: 45%;
+			height: 100vh;
+			background-color: lightgray;
+			position: fixed;
+			top: 0;
+			right: -45%;
+			border-top-left-radius: 15px;
+			border-bottom-left-radius: 15px;
+			padding: 20px;
+		}
+
+		.basket .top {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+
+		}
+
+		.basket .top h2 {
+			all: unset;
+			font-size: 32px;
+			font-weight: 500;
+		}
+
+		.basket-content {
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+			justify-content: center;
+			align-items: center;
+			gap: 30px;
+		}
+
+		.basket p {
+			font-size: 30px;
+			font-weight: 900;
+			cursor: pointer;
+		}
+
+		.cart-container {
+			width: 100%;
+			height: 70%;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.cart-container::after {
+			content: "";
+			display: block;
+			width: 100%;
+			height: 150px;
+			background: linear-gradient(transparent, lightgray);
+			position: absolute;
+			bottom: 0;
+		}
+
+		.scrollable {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			overflow-y: scroll !important;
+			padding-bottom: 200px;
+		}
+
+		.scrollable .item {
+			width: 100%;
+			min-height: 100px;
+			background-color: white;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 20px;
+			padding: 5px;
+			transition: .5s ease;
+			overflow: hidden;
+		}
+
+		.itemLeft {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.itemImg {
+			width: 100px;
+			height: 80px;
+			object-fit: contain;
+		}
+
+		.itemInf {
+			display: flex;
+			flex-direction: column;
+			justify-content: start;
+			align-items: start;
+			gap: 5px;
+		}
+
+		.itemH4 {
+			font-size: 25px;
+			font-weight: 400;
+		}
+
+		.discription {
+			font-weight: 300;
+			font-size: 20px;
+		}
+
+		.itemRight {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+		}
+
+		.itemCount {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			width: 100%;
+		}
+		.itemCount .counter {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 50px;
+		}
+		.itemCount .counter button,
+		.itemCount .counter span  {
+			padding: 10px;
+			width: 100%;
+			height: 100%;
+			font-size: larger;
+			cursor: pointer;
+		}
+
+
+		.ItemPrice {
+			font-size: 20px;
+			font-weight: 500;
+		}
+		.scrollable .animated_remove {
+			height: 0px !important;
+			min-height: 0px !important;
+			padding: 0px !important;
+
+		}
+		.overall {
+			width: 100%;
+			height: 25%;
+			background-color: white;
+			border-radius: 14px;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+		.overall .top_over {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.overall .top_over span {
+			font-size: 24px;
+		}
+	</style>
+	<title>Document</title>
+</head>
+
+<body>
+	<h2></h2>
+	<div class="btns">
+		<button data-count>Show first 5 elements</button>
+		<button data-all>Show all of them</button>
+		<button data-basket>Your basket</button>
+	</div>
+	<div class="container"></div>
+
+	<div class="basket">
+		<div class="top">
+			<h2>Busket</h2>
+			<p data-busketClose="">&times;</p>
+		</div>
+
+		<div class="cart-container">
+			<div class="scrollable">
+			</div>
+		</div>
+
+		<div class="overall" >
+			<div class="top_over">
+				<span>Total</span>
+				<span id="total" >1000 $</span>
+			</div>
+			<button>order</button>
+		</div>
+
+	</div>
+
+
+	<script src="./db.js"></script>
+	<script src="./index.js"></script>
+</body>
+
+</html>
